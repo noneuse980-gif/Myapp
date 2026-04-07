@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="KIITEE CMD">
+<meta name="theme-color" content="#0a0c0f">
+<meta name="description" content="KIITEE Command Center - Study Tracker">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
 <title>KIITEE Command Center</title>
 <style>
   :root {
@@ -464,7 +470,6 @@ function renderDashboard() {
     document.getElementById('prog-' + lower).style.width = p.pct + '%';
     document.getElementById('prog-' + lower + '-pct').textContent = p.pct + '%';
   });
-  // Today's tasks preview
   const preview = document.getElementById('dash-tasks-preview');
   const today = tasks.filter(t => !t.done).slice(0, 5);
   if (today.length === 0) {
@@ -477,7 +482,6 @@ function renderDashboard() {
         <span class="task-priority prio-${t.priority}">${t.priority.toUpperCase()}</span>
       </div>`).join('');
   }
-  // Exam date input sync
   if (examDate) document.getElementById('exam-date-input').value = examDate;
 }
 
@@ -683,7 +687,6 @@ function renderTasks() {
       <span class="task-priority prio-${t.priority}">${t.priority.toUpperCase()}</span>
       <button class="task-del" onclick="deleteTask('${t.id}')">✕</button>
     </div>`).join('');
-  // Update dashboard stat too
   const done = tasks.filter(t => t.done).length;
   document.getElementById('stat-tasks').textContent = done + '/' + tasks.length;
 }
@@ -713,6 +716,13 @@ function editTask(id) {
 function escHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function escAttr(s) { return String(s).replace(/'/g,"\\'"); }
 
+// ═══ SERVICE WORKER ═══
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(err => console.log('SW error:', err));
+  });
+}
+
 // ═══ INIT ═══
 function init() {
   if (examDate) document.getElementById('exam-date-input').value = examDate;
@@ -728,4 +738,3 @@ init();
 </script>
 </body>
 </html>
-
