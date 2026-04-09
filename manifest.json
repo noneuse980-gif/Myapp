@@ -1,7 +1,7 @@
 {
   "name": "Exam Prep",
   "short_name": "Exam Prep",
-  "description": "KIITEE Study Tracker - Syllabus, Timetable & Tasks",
+  "description": "Study Tracker - Syllabus, Timetable & Tasks",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0a0c0f",
