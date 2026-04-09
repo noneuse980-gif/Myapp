@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kiitee-cmd-v1';
+const CACHE_NAME = 'Exam dashboard';
 const ASSETS = [
   './',
   './index.html',
